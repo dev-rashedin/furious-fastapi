@@ -1,1 +1,1 @@
-## Chat App with AI
+## Furious FastAPI
