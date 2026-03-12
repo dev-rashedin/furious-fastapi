@@ -355,3 +355,79 @@ Take order → Wait for kitchen → Serve food → Next table
 Other tables must wait.
 
 ---
+
+### ASGI (Asynchronous)
+
+One waiter handles many tables.
+
+```
+Take order from table 1
+Take order from table 2
+Serve table 3
+Check table 4
+```
+
+While the kitchen is preparing one order, the waiter continues serving others.
+
+This makes the system **much more efficient**.
+
+---
+
+# ASGI Servers
+
+To run an ASGI application like FastAPI, you need an **ASGI server**.
+
+Popular options include:
+
+* **Uvicorn**
+* **Hypercorn**
+* **Daphne**
+
+The most common one used with FastAPI is **Uvicorn**.
+
+Example command:
+
+```
+uvicorn main:app --reload
+```
+
+This starts the FastAPI application using an ASGI server.
+
+---
+
+# When Is Async Most Useful?
+
+Async programming helps most when your API performs **I/O operations**, such as:
+
+* Database queries
+* External API calls
+* File operations
+* Network requests
+
+Instead of waiting for these operations to finish, the server can continue handling other requests.
+
+---
+
+# Summary
+
+FastAPI is a **modern Python framework for building APIs quickly and efficiently**.
+
+It combines powerful tools like **Starlette** and **Pydantic** to provide:
+
+* High performance
+* Automatic validation
+* Interactive documentation
+* Dependency injection
+* Security utilities
+* WebSocket support
+
+Because it uses **ASGI and asynchronous programming**, FastAPI can handle many requests concurrently and achieve excellent performance.
+
+This makes it a great choice for modern applications such as:
+
+* REST APIs
+* Microservices
+* AI services
+* Real-time applications
+
+In the next step, you will start building your **first FastAPI application** and see how simple it is to create APIs with Python.
