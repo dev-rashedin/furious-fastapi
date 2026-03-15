@@ -36,11 +36,6 @@ def get_items():
   return items
 
 
-@app.get("/items/{item_id}")
-def get_single_item(item_id: int):
-  return items[item_id - 1]
-
-
 # Add router
 app.include_router(router)
 
