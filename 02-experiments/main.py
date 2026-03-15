@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from data.items import items
-from routes.path_parameter import router
+from routes.path_parameter import pathParameterRouter
+from routes.query_parameter import queryParameterRouter
 
 # Create app with metadata
 app = FastAPI(
@@ -31,13 +32,19 @@ def health_check():
   return {"status": "ok"}
 
 
-@app.get("/items")
+@app.get("/all-items")
 def get_items():
   return items
 
+@app.post("/items")
+def create_item(item: dict):
+  items.append(item)
+  return item
+
 
 # Add router
-app.include_router(router)
+app.include_router(pathParameterRouter)
+app.include_router(queryParameterRouter)
 
 
 @app.get("/", tags=["root"])
