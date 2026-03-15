@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Path
-from data.items import items
+from app.data.items import items
 from enum import Enum
 
 pathParameterRouter = APIRouter()

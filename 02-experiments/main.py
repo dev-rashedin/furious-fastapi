@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.data.items import items
+from app.routes.items import itemsRouter
 from app.routes.path_parameter import pathParameterRouter
 from app.routes.query_parameter import queryParameterRouter
 
@@ -27,26 +27,20 @@ app.add_middleware(
 )
 
 
+# Health check
 @app.get("/health")
 def health_check():
   return {"status": "ok"}
 
 
-@app.get("/all-items")
-def get_items():
-  return items
-
-@app.post("/items")
-def create_item(item: dict):
-  items.append(item)
-  return item
-
 
 # Add router
+app.include_router(itemsRouter)
 app.include_router(pathParameterRouter)
 app.include_router(queryParameterRouter)
 
 
+# Root
 @app.get("/", tags=["root"])
 def read_root():
   return {"message": "Hello World"}
