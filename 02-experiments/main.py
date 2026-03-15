@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from data.items import items
+from routes.path_parameter import router
 
 # Create app with metadata
 app = FastAPI(
@@ -38,6 +39,10 @@ def get_items():
 @app.get("/items/{item_id}")
 def get_single_item(item_id: int):
   return items[item_id - 1]
+
+
+# Add router
+app.include_router(router)
 
 
 @app.get("/", tags=["root"])
