@@ -1,6 +1,27 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI()
+# Create app with metadata
+app = FastAPI(
+    title="Furious FastAPI",
+    version="0.0.1",
+    description="A complete guide to FastAPI",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    contact={
+        "name": "Furious FastAPI",
+        "url": "https://fastapi.tiangolo.com/",
+    },
+)
+
+# Add CORS middleware
+app.add_middleware(
+  CORSMiddleware,
+  allow_origins=["*"],
+  allow_credentials=True,
+  allow_methods=["*"],
+  allow_headers=["*"],
+)
 
 
 items = [
