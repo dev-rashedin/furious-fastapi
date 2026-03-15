@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from data.items import items
-from routes.path_parameter import pathParameterRouter
-from routes.query_parameter import queryParameterRouter
+from app.data.items import items
+from app.routes.path_parameter import pathParameterRouter
+from app.routes.query_parameter import queryParameterRouter
 
 # Create app with metadata
 app = FastAPI(
