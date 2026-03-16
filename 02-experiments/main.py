@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes.items import itemsRouter
+from app.routes.req_res_models import reqResModelsRouter
 from app.routes.path_parameter import pathParameterRouter
 from app.routes.query_parameter import queryParameterRouter
 
@@ -35,7 +35,7 @@ def health_check():
 
 
 # Add router
-app.include_router(itemsRouter)
+app.include_router(reqResModelsRouter)
 app.include_router(pathParameterRouter)
 app.include_router(queryParameterRouter)
 
