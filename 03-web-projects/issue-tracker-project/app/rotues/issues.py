@@ -51,6 +51,7 @@ async def create_issue(payload: IssueCreate):
 # Update a issue
 @router.put("/{issue_id}", response_model=IssueOut)
 async def update_issue(issue_id: str, payload: IssueUpdate):
+
   """ Update a issue """
   issues = load_data()
 
@@ -67,5 +68,20 @@ async def update_issue(issue_id: str, payload: IssueUpdate):
 
       save_data(issues)
       return issue
+
+  raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Issue not found")
+
+
+# Delete a issue
+@router.delete("/{issue_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_issue(issue_id: str):
+  """ Delete n issue by id"""
+  issues = load_data()
+
+  for issue in issues:
+    if issue["id"] == issue_id:
+      issues.remove(issue)
+      save_data(issues)
+      return
 
   raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Issue not found")
