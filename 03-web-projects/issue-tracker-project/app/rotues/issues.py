@@ -17,14 +17,18 @@ async def get_issues():
 
 # Create a new issue
 @router.post("/", response_model=IssueOut, status_code=status.HTTP_201_CREATED)
-async def create_issue():
+async def create_issue(payload: IssueCreate):
   """ Create a new issue """
   issues = load_data()
   new_issue = {
     "id": str(uuid.uuid4()),
-    "title": "New issue",
-    "description": "New issue description",
-    "priority": "low",
+    "title": payload.title,
+    "description": payload.description,
+    "priority": payload.priority,
     "status": "open"
   }
-  return {"id": str(uuid.uuid4())}
+
+  issues.append(new_issue)
+  save_data(issues)
+
+  return new_issue
