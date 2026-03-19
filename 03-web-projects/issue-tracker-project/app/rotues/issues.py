@@ -7,6 +7,26 @@ from app.storage import load_data, save_data
 router = APIRouter(prefix="/api/v1/issues", tags=["issues"])
 
 
+# Get all the issues
+@router.get("/", response_model=list[IssueOut])
+async def get_issues():
+  """ Get all the issues """
+  issues = load_data()
+  return issues
+
+
+# Get a single issue
+@router.get("/{issue_id}", response_model=IssueOut)
+async def get_single_issue(issue_id: str):
+  """ Get a single issue """
+  issues = load_data()
+
+  for issue in issues:
+    if issue["id"] == issue_id:
+      return issue
+  
+  raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Issue not found")
+
 
 # Create a new issue
 @router.post("/", response_model=IssueOut, status_code=status.HTTP_201_CREATED)
@@ -28,23 +48,24 @@ async def create_issue(payload: IssueCreate):
   return new_issue
 
 
-
-# Get all the issues
-@router.get("/", response_model=list[IssueOut])
-async def get_issues():
-  """ Get all the issues """
-  issues = load_data()
-  return issues
-
-
-# Get a single issue
-@router.get("/{issue_id}", response_model=IssueOut)
-async def get_single_issue(issue_id: str):
-  """ Get a single issue """
+# Update a issue
+@router.put("/{issue_id}", response_model=IssueOut)
+async def update_issue(issue_id: str, payload: IssueUpdate):
+  """ Update a issue """
   issues = load_data()
 
   for issue in issues:
     if issue["id"] == issue_id:
+      if payload.title is not None:
+        issue["title"] = payload.title
+      if payload.description is not None:
+        issue["description"] = payload.description
+      if payload.priority is not None:
+        issue["priority"] = payload.priority
+      if payload.status is not None:
+        issue["status"] = payload.status
+
+      save_data(issues)
       return issue
-  
+
   raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Issue not found")

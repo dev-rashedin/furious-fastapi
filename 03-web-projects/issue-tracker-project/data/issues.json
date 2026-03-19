@@ -12,5 +12,12 @@
     "description": "This is another test issue",
     "priority": "medium",
     "status": "open"
+  },
+  {
+    "id": "3d4c2555-2dcf-4f01-a6c5-fe0128325f5d",
+    "title": "Issue 3",
+    "description": "This is the updated issue",
+    "priority": "medium",
+    "status": "open"
   }
 ]
