@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from app.rotues.issues import router as issues_router
+from app.middleware.timer import timing_middleware
 
 
 app = FastAPI(
@@ -9,6 +10,8 @@ app = FastAPI(
   docs_url="/docs",
   redoc_url="/redoc"
 )
+
+app.middleware("http")(timing_middleware)
 
 @app.get("/")
 def root():
