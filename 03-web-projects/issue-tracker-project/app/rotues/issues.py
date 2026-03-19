@@ -78,10 +78,13 @@ async def delete_issue(issue_id: str):
   """ Delete n issue by id"""
   issues = load_data()
 
-  for issue in issues:
+  for i, issue in enumerate(issues):
     if issue["id"] == issue_id:
-      issues.remove(issue)
+      issues.pop(i)
       save_data(issues)
       return
 
-  raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Issue not found")
+  raise HTTPException(
+    status_code=status.HTTP_404_NOT_FOUND, 
+    detail="Issue not found"
+    )

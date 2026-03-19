@@ -19,12 +19,5 @@
     "description": "This is the updated issue",
     "priority": "medium",
     "status": "open"
-  },
-  {
-    "id": "ea2e2a92-e340-4499-839b-cbb6ba565340",
-    "title": "delete",
-    "description": "this issue is for delete",
-    "priority": "medium",
-    "status": "open"
   }
 ]
